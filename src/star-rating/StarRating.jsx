@@ -3,6 +3,7 @@ import './style.css'
 
 function StarRating({totalStars = 3, onRatingChange}) {
     const [rating, setRating] = useState(0)
+    const [hover, setHover] = useState(0)
 
     function handleClick(value){
         return ()=>{
@@ -21,9 +22,11 @@ function StarRating({totalStars = 3, onRatingChange}) {
                 const starValue = index + 1;
                 return (
                     <button 
-                    style={{color: index < rating ? 'green' : 'lightgray'}}
+                    className={`star ${starValue <= (hover || rating) ? 'active' : '' }`}
                     onClick={handleClick(starValue)}
-                    key={index} className='star'>★</button>
+                    onMouseEnter={()=> setHover(starValue)}
+                    onMouseLeave={()=> setHover(0)}
+                    key={index}>★</button>
                 )
             })
         }
