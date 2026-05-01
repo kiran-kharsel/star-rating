@@ -1,16 +1,25 @@
 import React, { useState } from 'react'
 import './style.css'
 
-function StarRating({totalStars = 5}) {
-    const [stars, setStars] = useState(Array(totalStars).fill('') || [])
+function StarRating({totalStars = 3}) {
+    const [rating, setRating] = useState(0)
+
+    function handleClick(id){
+        return ()=>{
+            setRating(id + 1)
+        }
+    };
 
 
   return (
     <div className='star-rating'>
         {
-            stars.map((star, index) => {
+            [...Array(totalStars)].map((_, index) => {
                 return (
-                    <button key={index} className='star'></button>
+                    <button 
+                    style={{color: index < rating ? 'green' : 'lightgray'}}
+                    onClick={handleClick(index)}
+                    key={index} className='star'>★</button>
                 )
             })
         }
