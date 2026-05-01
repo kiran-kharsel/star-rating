@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './style.css'
 
-function StarRating() {
+function StarRating({totalStars = 5}) {
+    const [stars, setStars] = useState(Array(totalStars).fill('') || [])
+
+
   return (
-    <div>StarRating</div>
+    <div className='star-rating'>
+        {
+            stars.map((star, index) => {
+                return (
+                    <button key={index} className='star'></button>
+                )
+            })
+        }
+    </div>
   )
 }
 
